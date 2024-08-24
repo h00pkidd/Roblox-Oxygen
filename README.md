@@ -30,4 +30,18 @@ Now that you have the verification token, its time to validate your session. Sen
 ```
 
 ### 4.
-And that's it! The next payout request using the same session should successfully pay out the robux
+The next payout request using the same session has to include 3 new headers:
+- rblx-challenge-id - containing the `first` challenge id
+- rblx-challenge-type - containing the string "twostepverification"
+- rblx-challenge-metadata - containing this base64 encoded json:
+```json
+{
+   "rememberDevice": false,
+   "actionType": "Generic",
+   "verificationToken": "%the verification token%",
+   "challengeId": "%the second challenge id%"
+}
+```
+
+### 5.
+That's it! Everything should be validated and robux sent.
